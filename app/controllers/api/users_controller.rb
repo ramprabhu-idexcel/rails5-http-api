@@ -46,12 +46,8 @@ module Api
     # DELETE multiple users
     def delete_all
       ids = get_ids_from_params
-      if User.delete_all(["id in (?)", ids])
-        @users = User.all
-        render json: @users
-      else
-        render json: { message: "Invalid user", status: 401 }
-      end
+      User.delete_all(["id in (?)", ids])
+      index
     end
 
     # Post /users/validate
